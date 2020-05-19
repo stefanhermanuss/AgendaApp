@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 import FirebaseFirestore
-import Firebase
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
@@ -28,6 +28,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("balik lagi bro")
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         Utilities.bottomBorderOnly(self.emailField)
         Utilities.bottomBorderOnly(self.passField)
         Utilities.bottomBorderOnly(self.nameField)
@@ -44,7 +49,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         signUpBtn.layer.cornerRadius = signUpBtn.frame.height/2
         signUpBtn.layer.borderColor = UIColor.white.cgColor
         signUpBtn.layer.borderWidth = 2
-        
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -72,7 +76,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func moveToHome(){
-        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        let homeViewController = (self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController)!
         
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()
@@ -131,7 +135,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.showError("There was a problem, try again later.")
                             }
                         }
-                        
+                        print("successfully created \(email)")
                         self.moveToHome()
                     }
                 }
@@ -151,5 +155,4 @@ extension UIColor{
         )
     }
 }
-
 
